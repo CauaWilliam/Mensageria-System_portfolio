@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mensageria.API", "Mensageria.API\Mensageria.API.csproj", "{6E220186-27D2-4980-8A01-DC8804D6893B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mensageria.Domain", "Mensageria.Domain\Mensageria.Domain.csproj", "{5BB03FB5-53F5-4B26-A12A-D5E88145CDF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mensageria.Application", "Mensageria.Application\Mensageria.Application.csproj", "{F4082341-2A20-41AB-B718-F00AF5C8F4C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mensageria.Infra", "Mensageria.Infra\Mensageria.Infra.csproj", "{6D07D732-5C6D-4C0C-9042-13DFA33A2FCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E220186-27D2-4980-8A01-DC8804D6893B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E220186-27D2-4980-8A01-DC8804D6893B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E220186-27D2-4980-8A01-DC8804D6893B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E220186-27D2-4980-8A01-DC8804D6893B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB03FB5-53F5-4B26-A12A-D5E88145CDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB03FB5-53F5-4B26-A12A-D5E88145CDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB03FB5-53F5-4B26-A12A-D5E88145CDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB03FB5-53F5-4B26-A12A-D5E88145CDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4082341-2A20-41AB-B718-F00AF5C8F4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4082341-2A20-41AB-B718-F00AF5C8F4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4082341-2A20-41AB-B718-F00AF5C8F4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4082341-2A20-41AB-B718-F00AF5C8F4C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D07D732-5C6D-4C0C-9042-13DFA33A2FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D07D732-5C6D-4C0C-9042-13DFA33A2FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D07D732-5C6D-4C0C-9042-13DFA33A2FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D07D732-5C6D-4C0C-9042-13DFA33A2FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
