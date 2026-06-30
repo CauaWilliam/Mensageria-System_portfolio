@@ -1,0 +1,9 @@
+﻿## Caches e Binários do .NET
+bin/
+obj/
+
+## Pastas de configuração do Rider / IDEs
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
