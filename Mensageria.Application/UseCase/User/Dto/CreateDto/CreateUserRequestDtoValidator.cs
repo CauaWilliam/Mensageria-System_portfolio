@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Mensageria.Application.UseCase.User.Dto;
+namespace Mensageria.Application.UseCase.User.Dto.CreateDto;
 
-public class CreateUserRequestDtoValidator: AbstractValidator<CreateUserRequestDto>
+public class CreateUserRequestDtoValidator: AbstractValidator<CreateUserDto>
 {
     public CreateUserRequestDtoValidator()
     {

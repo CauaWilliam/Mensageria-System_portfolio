@@ -1,6 +1,6 @@
-﻿namespace Mensageria.Application.UseCase.User.Dto;
+﻿namespace Mensageria.Application.UseCase.User.Dto.CreateDto;
 
-public class CreateUserRequestDto
+public class CreateUserDto
 {
    public string Name { get; set; }
    public string Email { get; set; }

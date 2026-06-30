@@ -8,7 +8,7 @@ namespace Mensageria.Infra.Repositories;
 public class UserRepository(AppDbContext dbContext): IUserRepository
 {   
     
-    public async Task<string> CadastrarAsync(UserEntity user)
+    public async Task<string> CreateAsync(UserEntity user)
     {
         var response = await dbContext.Users.AddAsync(user);
         await dbContext.SaveChangesAsync();

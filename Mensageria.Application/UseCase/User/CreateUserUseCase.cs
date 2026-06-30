@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Mensageria.Application.UseCase.User.Dto;
+using Mensageria.Application.UseCase.User.Dto.CreateDto;
 using Mensageria.Domain.Entity;
 using Mensageria.Domain.Interfaces.Repositories;
 
@@ -7,9 +7,9 @@ namespace Mensageria.Application.UseCase.User;
 
 public class CreateUserUseCase(
     IUserRepository userRepository,
-    IValidator<CreateUserRequestDto> validator )
+    IValidator<CreateUserDto> validator )
 {
-    public async Task<string> Execute(CreateUserRequestDto request)
+    public async Task<string> Execute(CreateUserDto request)
     {
         var validateResult = await validator.ValidateAsync(request);
         if (!validateResult.IsValid)
@@ -38,6 +38,6 @@ public class CreateUserUseCase(
             CreatedAt = DateTime.UtcNow.ToString("O"),
             UpdatedAt = DateTime.UtcNow.ToString("O")
         };
-        return await userRepository.CadastrarAsync(response);
+        return await userRepository.CreateAsync(response);
     }
 }

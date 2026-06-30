@@ -1,0 +1,9 @@
+﻿using Mensageria.Domain.Entity;
+
+namespace Mensageria.Application.UseCase.Message.Dto.CreateDto;
+
+public class CreateMessageDto
+{    
+    public string Content { get; set; }
+    public List<string> Emails {get; set;}
+}
