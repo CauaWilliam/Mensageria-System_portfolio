@@ -1,6 +1,8 @@
-﻿namespace Mensageria.Domain.Entity;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class UserEntity
+namespace Mensageria.Domain.Entity;
+
+public class UserEntity 
 {
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;

@@ -19,4 +19,21 @@ public class MessageRepository(AppDbContext dbContext): IMessageRepository
         var response = await dbContext.Messages.FirstOrDefaultAsync(m => m.Id == id);
         return response;
     }
+
+    public async Task UpdateAsync(MessageEntity message)
+    {
+        dbContext.Messages.Update(message);
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateStatusAsync(string messageId, int status)
+    {
+        var message = await dbContext.Messages.FirstOrDefaultAsync(m => m.Id == messageId);
+        if (message != null)
+        {
+            message.Status = (MessageStatus)status; 
+            dbContext.Messages.Update(message);
+            await dbContext.SaveChangesAsync();
+        }
+    }
 }

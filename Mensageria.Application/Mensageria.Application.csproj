@@ -17,8 +17,13 @@
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
       <PackageReference Include="IdGen" Version="3.0.7" />
       <PackageReference Include="IdGen.DependencyInjection" Version="3.0.7" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.9" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.9" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
+      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.19.1" />
+      <PackageReference Include="RabbitMQ.Client" Version="7.2.1" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.19.1" />
     </ItemGroup>
 
 </Project>

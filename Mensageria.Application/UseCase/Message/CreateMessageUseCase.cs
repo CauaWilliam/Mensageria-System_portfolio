@@ -1,20 +1,23 @@
 ﻿using FluentValidation;
+using Mensageria.Application.Common.Events;
 using Mensageria.Application.UseCase.Message.Dto.CreateDto;
 using Mensageria.Domain.Entity;
 using Mensageria.Domain.Interfaces.Repositories;
 using Mensageria.Domain.Interfaces.Share;
+using Mensageria.Application.Common.Events.Interfaces;
 
 namespace Mensageria.Application.UseCase.Message;
 
 public class CreateMessageUseCase (
     IMessageRepository messageRepository,
     IValidator<CreateMessageDto> validator,
-    ISnowFlakeGenerator snowFlakeGenerator
+    ISnowFlakeGenerator snowFlakeGenerator,
+    IIntegrationEventPublisher eventPublisher
     )
 {
-    public async Task<MessageEntity> Execute(CreateMessageDto request)
+    public async Task<MessageEntity> Execute(CreateMessageDto data, string  userId)
     {
-        var validateResult = await validator.ValidateAsync(request);
+        var validateResult = await validator.ValidateAsync(data);
         if (!validateResult.IsValid)
         {
             throw new Exception(validateResult.Errors.First().ErrorMessage);
@@ -22,7 +25,7 @@ public class CreateMessageUseCase (
 
         var messageId = snowFlakeGenerator.GenerateId();
 
-        List<MessageRecipientEntity> recipients = request.Emails.Select(email => new MessageRecipientEntity
+        List<MessageRecipientEntity> recipients = data.Emails.Select(email => new MessageRecipientEntity
         {
             Id = snowFlakeGenerator.GenerateId(),
             MessageId = messageId,
@@ -36,16 +39,19 @@ public class CreateMessageUseCase (
         var response = new MessageEntity
         {
             Id = messageId,
-            Content = request.Content,
+            Content = data.Content,
             Recipients = recipients,
-            UserId = "243b4fce-51f7-4f82-8a05-a6d1ed445799",
+            UserId = userId,
             CreatedAt = DateTime.UtcNow.ToString("O"),
             UpdatedAt = DateTime.UtcNow.ToString("O"),
             SentAt = null,
             Status = MessageStatus.Pending
         };
         
-        
-        return await messageRepository.CreateAsync(response);
+        var createdMessage = await messageRepository.CreateAsync(response);
+
+        var MessageCreatedEvent = new CreateMessageEvent(messageId);
+        await eventPublisher.PublishAsync("messages-to-send", MessageCreatedEvent);
+        return createdMessage;
     }
 }

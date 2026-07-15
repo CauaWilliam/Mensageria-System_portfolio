@@ -1,4 +1,5 @@
-﻿using Mensageria.Domain.Interfaces.Repositories;
+﻿using Mensageria.Application.Common.Events;
+using Mensageria.Domain.Interfaces.Repositories;
 using Mensageria.Domain.Interfaces.Share;
 using Mensageria.Infra.db.Context;
 using Mensageria.Infra.Repositories;
@@ -18,6 +19,7 @@ public static class InfraModule
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
         services.AddSingleton<ISnowFlakeGenerator, SnowFlakeGenerator>();
+        services.AddHostedService<MessageConsumer>();
         return services;
     }
 }

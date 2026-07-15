@@ -12,6 +12,18 @@ public class MessageEntity
     public string? SentAt { get; set; }  = string.Empty;
     public string CreatedAt { get; set; } = string.Empty;
     public string? UpdatedAt { get; set; }
+
+
+    public void UpdateContent(string newContent)
+    {
+        if (Status != MessageStatus.Sent)
+        {
+            throw new InvalidOperationException("Não é possível editar uma mensagem que já foi processada ou enviada.");
+
+            Content = newContent;
+            UpdatedAt = DateTime.UtcNow.ToString("O");
+        }
+    }
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
