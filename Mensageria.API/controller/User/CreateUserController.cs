@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mensageria.API.controller.User;
 
-[Route("api/users/[controller]")]
+[Route("api/users")]
 [ApiController]
 public class CreateUserController(CreateUserUseCase createUserUseCase) : Controller
 {
-    [HttpPost("/create")]
+    [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserDto data)
     {
