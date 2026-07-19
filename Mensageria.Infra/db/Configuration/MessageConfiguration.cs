@@ -40,8 +40,12 @@ public class MessageConfiguration : IEntityTypeConfiguration<MessageEntity>
             .HasColumnName("sent_at")
             .HasColumnType("timestamp with time zone")
             .HasConversion(
-                isoString => isoString != null ? DateTimeOffset.Parse(isoString) : (DateTimeOffset?)null,
-                dateTimeOffset => dateTimeOffset.HasValue ? dateTimeOffset.Value.ToString("o") : null);
+                isoString => isoString != null 
+                ? DateTimeOffset.Parse(isoString).ToUniversalTime() : (DateTimeOffset?)null,
+
+                dateTimeOffset => dateTimeOffset.HasValue 
+                ? dateTimeOffset.Value.ToUniversalTime().ToString("o") 
+                : null);
         
         builder.Property(u => u.CreatedAt)
             .HasColumnName("created_at")
