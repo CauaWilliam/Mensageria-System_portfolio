@@ -64,7 +64,22 @@ private readonly ILogger<MessageConsumer> _logger;
                     using(var scope = _serviceProvider.CreateScope())
                     {   
                         var messageRepository = scope.ServiceProvider.GetRequiredService<IMessageRepository>();
-                        await messageRepository.UpdateStatusAsync(messageEvent.MessageId, 1);
+                        var message = await messageRepository.FindByIdAsync(messageEvent.MessageId);
+
+                        if(message != null)
+                        {
+                            _logger.LogInformation("⏳ [Worker] Mensagem {Id} está agendada para o futuro ({Time}). Devolvendo para a fila.", message.Id, message.SentAt);
+                            await Task.Delay(10000, stoppingToken);
+                            await _channel.BasicNackAsync(ea.DeliveryTag, multiple: false, requeue: true, cancellationToken: stoppingToken);
+                            return;
+                        }
+
+                        message.Status = Domain.Entity.MessageStatus.Sent;
+                        message.SentAt = DateTime.UtcNow.ToString();
+
+                        await messageRepository.UpdateAsync(message);
+
+                        await _channel.BasicAckAsync(ea.DeliveryTag, multiple: false, cancellationToken: stoppingToken);
                     }
                 }
                 await _channel.BasicAckAsync(ea.DeliveryTag, multiple: false, cancellationToken: stoppingToken);

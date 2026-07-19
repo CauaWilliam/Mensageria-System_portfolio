@@ -44,7 +44,7 @@ public class CreateMessageUseCase (
             UserId = userId,
             CreatedAt = DateTime.UtcNow.ToString("O"),
             UpdatedAt = DateTime.UtcNow.ToString("O"),
-            SentAt = null,
+            SentAt = data.SentAt,
             Status = MessageStatus.Pending
         };
         
