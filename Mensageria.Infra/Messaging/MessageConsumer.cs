@@ -4,6 +4,7 @@ using Mensageria.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -15,23 +16,25 @@ private readonly ILogger<MessageConsumer> _logger;
     private readonly IServiceProvider _serviceProvider;
     private IConnection? _connection;
     private IChannel? _channel;
+    private readonly IConfiguration _configuration;
     private const string QueueName = "messages-to-send";
 
 
-    public MessageConsumer(ILogger<MessageConsumer> logger, IServiceProvider serviceProvider)
+    public MessageConsumer(ILogger<MessageConsumer> logger, IServiceProvider serviceProvider, IConfiguration configuration)
     {
         _logger = logger;
         _serviceProvider = serviceProvider;
+        _configuration = configuration;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var factory = new ConnectionFactory
         {
-            HostName = "localhost",
-            UserName = "guest",
-            Password = "guest",
-            Port = 5672
+            HostName = _configuration["RabbitMqSettings:HostName"],
+            UserName = _configuration["RabbitMqSettings:UserName"],
+            Password = _configuration["RabbitMqSettings:Password"],
+            Port = int.Parse(_configuration["RabbitMqSettings:Port"])
         };
 
         _connection = await factory.CreateConnectionAsync(stoppingToken);
